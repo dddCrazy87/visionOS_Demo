@@ -1,24 +1,22 @@
-//
-//  ContentView.swift
-//  visionOS_Demo
-//
-//  Created by 許昀韋 on 2024/2/28.
-//
-
 import SwiftUI
 import RealityKit
-import RealityKitContent
-
+ 
 struct ContentView: View {
-
-    @State private var showImmersiveSpace = false
-    @State private var immersiveSpaceIsShown = false
-
-    @Environment(\.openImmersiveSpace) var openImmersiveSpace
-    @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
-
+    private let url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/retrotv/tv_retro.usdz")!
+    
     var body: some View {
-        Text("Hello, visionOS!")
+        VStack {
+            Text("Show a TV")
+            Model3D(url: url) { 
+                model in model
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 200, height: 200)
+            } placeholder: {
+                ProgressView()
+            }
+        }
+        .padding()
     }
 }
 
